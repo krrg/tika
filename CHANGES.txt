@@ -46,6 +46,9 @@ Release 4.3.0 - ???
 
   OTHER CHANGES
 
+   * Preserve presentation slide order when extracting PPTX content and assigning
+     embedded-image page references (TIKA-5017).
+
    * A runtime fetcher or emitter save or delete reaches running pipes workers at
      their next fetch, through a change token on file and ignite stores
      (ConfigStore.changeToken); before, a worker kept the instance it first built

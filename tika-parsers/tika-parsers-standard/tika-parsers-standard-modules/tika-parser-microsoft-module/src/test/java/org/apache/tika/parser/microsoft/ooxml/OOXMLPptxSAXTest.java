@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -46,6 +47,14 @@ import org.apache.tika.sax.BodyContentHandler;
  * Tests for the PPTX parser.
  */
 public class OOXMLPptxSAXTest extends TikaTest {
+
+    @Test
+    public void testSlideOrder() throws Exception {
+        String xml = getXML("testPPT_reordered.pptx").xml;
+        assertEquals(List.of("SLIDE_C", "SLIDE_A", "SLIDE_B"),
+                Pattern.compile("SLIDE_[ABC]").matcher(xml).results()
+                        .map(match -> match.group()).toList());
+    }
 
     // ---- tests from AbstractOOXMLPptxTest ----
 
